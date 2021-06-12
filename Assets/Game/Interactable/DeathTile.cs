@@ -59,6 +59,7 @@ public class DeathTile : MonoBehaviour
             //Player Effect
             DeathSprite.SetActive(false);
             AliveSprite.SetActive(true);
+            IsAlive = true;
         }
     }
 

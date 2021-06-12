@@ -32,7 +32,27 @@ public class PlayerController : MonoBehaviour
         {
             HorizontalInput = Input.GetAxisRaw("Horizontal");
             VerticalInput = Input.GetAxisRaw("Vertical");
-            if(Input.GetAxisRaw("Drag") == 1f)
+            if (VerticalInput == 1)
+            {
+                ControlledCharacter.animation_top();
+
+            }
+            else if (VerticalInput == -1)
+            {
+                ControlledCharacter.animation_down();
+
+            }
+            else if (HorizontalInput == 1)
+            {
+                ControlledCharacter.animation_right();
+
+            }
+            if (HorizontalInput == -1)
+            {
+                ControlledCharacter.animation_left();
+
+            }
+            if (Input.GetAxisRaw("Drag") == 1f)
             {
                 InDragMode = true;
             }

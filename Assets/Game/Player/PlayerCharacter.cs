@@ -26,13 +26,31 @@ public class PlayerCharacter : MonoBehaviour
     private Vector3 TargetPos = Vector3.zero;
     private Vector3 StartPos = Vector3.zero;
 
+    //Animator Control
+    private Animator myanimator; 
     private void Awake()
     {
 
     }
-
+    public void animation_top()
+    {
+        myanimator.SetInteger("dir", 0);
+    }
+    public void animation_down()
+    {
+        myanimator.SetInteger("dir", 1);
+    }
+    public void animation_left()
+    {
+        myanimator.SetInteger("dir", 2);
+    }
+    public void animation_right()
+    {
+        myanimator.SetInteger("dir", 3);
+    }
     private void Start()
     {
+        myanimator = GetComponent<Animator>();
         if (MyPlayerController == null && AutoPocessOnCreate)
         {
             GameInstance.Instance.MyPlayerController.ControlledCharacter = this;

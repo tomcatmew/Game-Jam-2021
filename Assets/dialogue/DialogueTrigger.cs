@@ -7,7 +7,7 @@ public class DialogueTrigger : MonoBehaviour
 
 	public Dialogue dialogue;
     public DialogueManager diamanager;
-
+    public GameObject prefabdialog;
     public void TriggerDialogue()
 	{
         diamanager.StartDialogue(dialogue);
@@ -15,6 +15,6 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Start()
     {
-		TriggerDialogue();
+        prefabdialog.SetActive(true);
     }
 }

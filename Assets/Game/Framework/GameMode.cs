@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class GameMode : MonoBehaviour
 {
+
+    public bool IsGameOver = false;
+
     //Implement the Game Rules here
     public void GameOver()
     {
-        //Spawn GameOver UI
-        Debug.Log("GameOver");
+        if (!IsGameOver)
+        {
+            //Spawn GameOver UI
+            GameInstance.Instance.MyPlayerController.AllowPlayerControl = false;
+            IsGameOver = true;
+            Debug.Log("GameOver");
+        }
     }
 }

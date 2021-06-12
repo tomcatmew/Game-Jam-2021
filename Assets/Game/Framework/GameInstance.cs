@@ -33,6 +33,14 @@ public class GameInstance : MonoBehaviour
         ORANGE
     }
 
+    public enum FacingDir
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
+
     void Awake()
     {
         if(Instance == null)

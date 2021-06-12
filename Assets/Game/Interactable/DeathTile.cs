@@ -24,7 +24,35 @@ public class DeathTile : MonoBehaviour
         }
     }
 
-    void Flourish()
+    private void Update()
+    {
+        if (!IsAlive)
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f);
+            foreach (Collider2D coll in colliders)
+            {
+                if (coll.gameObject.tag == "MagicObject")
+                {
+                    if (coll.gameObject.GetComponent<MagicObject>().DefaultColor == GameInstance.MagicColor.GREEN)
+                    {
+                        Flourish();
+                    }
+                    else
+                    {
+                        //Explode Effect
+                        coll.gameObject.GetComponent<MagicObject>().Kill();
+                        GameInstance.Instance.MyGameMode.GameOver();
+                    }
+                }
+                else if (coll.gameObject.tag == "Player")
+                {
+                    coll.gameObject.GetComponent<PlayerCharacter>().Kill();
+                }
+            }
+        }
+    }
+
+    public void Flourish()
     {
         if (!IsAlive)
         {
@@ -34,6 +62,7 @@ public class DeathTile : MonoBehaviour
         }
     }
 
+    /*
     void OnTriggerEnter2D(Collider2D col)
     {
         //Debug.Log(col.attachedRigidbody.gameObject.tag);
@@ -46,5 +75,5 @@ public class DeathTile : MonoBehaviour
             }
         }
     }
-
+    */
 }

@@ -5,8 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Pushable
+  - Destroyable
   - MagicObject
+  - Destroyable
+  - Dispealable
   layers:
   - Default
   - TransparentFX

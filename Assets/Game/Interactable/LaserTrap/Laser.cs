@@ -18,13 +18,21 @@ public class Laser : MonoBehaviour
 
     void ShootLaser()
     {
-        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, (LaserFirePoint.position - gameObject.transform.position).normalized, Mathf.Infinity, BlockLaserLayer + PlayerLayer);
+        RaycastHit2D Hit = Physics2D.Raycast(LaserFirePoint.transform.position, (LaserFirePoint.position - gameObject.transform.position).normalized, Mathf.Infinity, BlockLaserLayer + PlayerLayer);
         if (Hit.collider != null)
         {
             Draw2DRay(LaserFirePoint.position,Hit.point);
             if(Hit.collider.gameObject.tag == "Player")
             {
                 Hit.collider.gameObject.GetComponent<PlayerCharacter>().Kill();
+            }
+            else if(Hit.collider.gameObject.tag == "MagicObject")
+            {
+                if(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor != GameInstance.MagicColor.PURPLE)
+                {
+                    Hit.collider.gameObject.GetComponent<MagicObject>().Kill();
+                    GameInstance.Instance.MyGameMode.GameOver();
+                }
             }
         }
         else
@@ -38,5 +46,11 @@ public class Laser : MonoBehaviour
     {
         MyLineRenderer.SetPosition(0, StartPos);
         MyLineRenderer.SetPosition(1, EndPos);
+    }
+
+    public void Kill()
+    {
+        gameObject.SetActive(false);
+        Destroy(gameObject,0.1f);
     }
 }

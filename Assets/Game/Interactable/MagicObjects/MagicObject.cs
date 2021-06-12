@@ -4,13 +4,21 @@ using UnityEngine;
 public class MagicObject : MonoBehaviour
 {
 
-    public PlayerController MyPlayerController;
-
     public bool IsGrabed = false;
 
-    public GameInstance.MagicColor DefaultColor = GameInstance.MagicColor.BLUE;
+    [SerializeField] public GameInstance.MagicColor DefaultColor = GameInstance.MagicColor.BLUE;
 
-    [SerializeField] private LayerMask BlockMovementLayer;
+    [SerializeField] protected LayerMask BlockMovementLayer;
+
+    [SerializeField] protected float MovementThreshold = 0.5f;
+    [SerializeField] private float MoveTime = 0.3f;
+
+    private float CurrAnimTime = 0f;
+
+    protected bool Moved = false;
+    private bool InMoveAnim = false;
+    private Vector3 TargetPos = Vector3.zero;
+    private Vector3 StartPos = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -21,16 +29,117 @@ public class MagicObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Moved)
+        {
+            if (!InMoveAnim)
+            {
+                StartPos = gameObject.transform.position;
+                CurrAnimTime = 0f;
+                InMoveAnim = true;
+            }
+            else
+            {
+                float t = Mathf.Clamp01(CurrAnimTime / MoveTime);
+                Vector3 CurrPos = Vector3.Lerp(StartPos, TargetPos, t);
+                gameObject.transform.position = CurrPos;
+                CurrAnimTime += Time.deltaTime;
+                if (CurrAnimTime >= MoveTime)
+                {
+                    gameObject.transform.position = TargetPos;
+                    CurrAnimTime = 0f;
+                    InMoveAnim = false;
+                    Moved = false;
+                }
+            }
+        }
+    }
+    virtual public bool CheckMove(Vector2 Input)
+    {
+        if (Input.x >= MovementThreshold && !Moved)
+        {
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Right
+                return true;
+            }
+        }
+        else if (Input.x <= -MovementThreshold && !Moved)
+        {
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.right, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Left
+                return true;
+            }
+        }
+        else if (Input.y >= MovementThreshold && !Moved)
+        {
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.up, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Up
+                return true;
+            }
+        }
+        else if (Input.y <= -MovementThreshold && !Moved)
+        {
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.up, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Down
+                return true;
+            }
+        }
+        return false;
     }
 
     public void Move(Vector2 Input)
     {
-        if (!IsGrabed)
+        if (Input.x >= MovementThreshold && !Moved)
         {
-            return;
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Right
+                TargetPos = gameObject.transform.position + new Vector3(GameInstance.Instance.TileSize, 0f, 0f);
+                Moved = true;
+                InMoveAnim = false;
+            }
         }
-
+        else if (Input.x <= -MovementThreshold && !Moved)
+        {
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.right, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Left
+                TargetPos = gameObject.transform.position + new Vector3(-GameInstance.Instance.TileSize, 0f, 0f);
+                Moved = true;
+                InMoveAnim = false;
+            }
+        }
+        else if (Input.y >= MovementThreshold && !Moved)
+        {
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.up, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Up
+                TargetPos = gameObject.transform.position + new Vector3(0f, GameInstance.Instance.TileSize, 0f);
+                Moved = true;
+                InMoveAnim = false;
+            }
+        }
+        else if (Input.y <= -MovementThreshold && !Moved)
+        {
+            RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.up, GameInstance.Instance.TileSize, BlockMovementLayer);
+            if (Hit.collider == null)
+            {
+                //Move Down
+                TargetPos = gameObject.transform.position + new Vector3(0f, -GameInstance.Instance.TileSize, 0f);
+                Moved = true;
+                InMoveAnim = false;
+            }
+        }
     }
 
     public List<GameObject> CheckNearMagic()
@@ -38,7 +147,7 @@ public class MagicObject : MonoBehaviour
         List<GameObject> list = new List<GameObject>();
 
         // find x direction
-        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(GameInstance.Instance.TileSize, 0f), gameObject.layer);
+        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(GameInstance.Instance.TileSize, 0f), ~gameObject.layer);
 
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
@@ -46,21 +155,21 @@ public class MagicObject : MonoBehaviour
         }
 
         // find x direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(-GameInstance.Instance.TileSize, 0f), gameObject.layer);
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(-GameInstance.Instance.TileSize, 0f), ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
             list.Add(Hit.collider.gameObject);
         }
 
         // find y direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, GameInstance.Instance.TileSize), gameObject.layer);
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, GameInstance.Instance.TileSize), ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
             list.Add(Hit.collider.gameObject);
         }
 
         // find y direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, -GameInstance.Instance.TileSize), gameObject.layer);
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, -GameInstance.Instance.TileSize), ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
             list.Add(Hit.collider.gameObject);
@@ -103,7 +212,6 @@ public class MagicObject : MonoBehaviour
 
         // find x direction
         RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(GameInstance.Instance.TileSize, 0f), BlockMovementLayer);
-
         if (Hit.collider == null)
         {
             list.Add(new Vector2(1f, 0f));
@@ -135,12 +243,14 @@ public class MagicObject : MonoBehaviour
 
     public void ComposeMagicColor(Vector2 Input)
     {
-        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, Input * GameInstance.Instance.TileSize, gameObject.layer);
+        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, Input, GameInstance.Instance.TileSize, ~gameObject.layer);
 
         if (Hit.collider == null || !Hit.collider.CompareTag("MagicObject"))
         {
             return;
         }
+
+        Debug.Log(Hit.collider.gameObject.name);
 
         MagicObject TargetObject = Hit.collider.gameObject.GetComponent<MagicObject>();
         GameInstance.MagicColor ComposedColor = GetComposedColor(TargetObject.DefaultColor);
@@ -151,20 +261,35 @@ public class MagicObject : MonoBehaviour
             return;
         }
 
-        Destroy(TargetObject);
-        Destroy(gameObject);
+        TargetObject.Kill();
+        Kill();
         CreateMagicObject(ComposedColor, TargetPos);
+
+
+    }
+
+    public void Kill()
+    {
+        gameObject.SetActive(false);
+        Destroy(gameObject, 0.1f);
     }
 
     public void DecomposeMagicObject(Vector2 Input, GameInstance.MagicColor magicColor)
     {
+        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, Input, GameInstance.Instance.TileSize, ~gameObject.layer);
+
+        if (Hit.collider != null)
+        {
+            return;
+        }
+
         Vector3 TargetPos = gameObject.transform.position + new Vector3(Input.x, Input.y, 0) * GameInstance.Instance.TileSize;
         CreateMagicObject(magicColor, TargetPos);
 
         GameInstance.MagicColor DecomposedColor = GetDecomposedColor(magicColor);
         Vector3 OriginPos = gameObject.transform.position;
 
-        Destroy(gameObject);
+        Kill();
 
         CreateMagicObject(DecomposedColor, OriginPos);
     }

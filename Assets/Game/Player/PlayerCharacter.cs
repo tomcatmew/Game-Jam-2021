@@ -19,6 +19,8 @@ public class PlayerCharacter : MonoBehaviour
 
     private float CurrAnimTime = 0f;
 
+    private GameInstance.FacingDir Facing = GameInstance.FacingDir.DOWN;
+
     private bool Moved = false;
     private bool InMoveAnim = false;
     private Vector3 TargetPos = Vector3.zero;
@@ -33,14 +35,15 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (MyPlayerController == null && AutoPocessOnCreate)
         {
-           GameInstance.Instance.MyPlayerController.ControlledCharacter = this;
-           MyPlayerController = GameInstance.Instance.MyPlayerController;
-           IsPocessed = true;
+            GameInstance.Instance.MyPlayerController.ControlledCharacter = this;
+            MyPlayerController = GameInstance.Instance.MyPlayerController;
+            IsPocessed = true;
         }
         else
         {
             IsPocessed = false;
         }
+
     }
 
     // Update is called once per frame
@@ -82,71 +85,153 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
+    public Vector2 GetFacingDir()
+    {
+        switch (Facing)
+        {
+            case GameInstance.FacingDir.UP:
+                return gameObject.transform.up;
+            case GameInstance.FacingDir.DOWN:
+                return -gameObject.transform.up;
+            case GameInstance.FacingDir.LEFT:
+                return -gameObject.transform.right;
+            case GameInstance.FacingDir.RIGHT:
+                return gameObject.transform.right;
+        }
+
+        return new Vector2(0, 0);
+    }
+
     public void Move(Vector2 Input, bool IsDragging)
     {
         if (IsMovable)
         {
-            if(Input.x >= MovementThreshold && !Moved)
+            bool CanMove = false;
+
+            if (Input.x >= MovementThreshold && !Moved)
             {
-                RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector3(GameInstance.Instance.TileSize, 0f, 0f),GameInstance.Instance.TileSize, BlockMovementLayer);
-                if (Hit.collider == null || (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable"))
+                RaycastHit2D FacingDirHit = Physics2D.Raycast(gameObject.transform.position, GetFacingDir(), GameInstance.Instance.TileSize, BlockMovementLayer);
+                RaycastHit2D MoveDirHit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, GameInstance.Instance.TileSize, BlockMovementLayer);
+                if (!IsDragging)
                 {
-                    if (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable")
+                    Facing = GameInstance.FacingDir.RIGHT;
+                }
+
+                if (IsDragging && FacingDirHit.collider != null)
+                {
+                    if (FacingDirHit.collider.gameObject.tag == "MagicObject")
                     {
-                        //Move the box
+                        CanMove = FacingDirHit.collider.gameObject.GetComponent<MagicObject>().CheckMove(Input);
                     }
+                }
+
+                if (MoveDirHit.collider == null || (CanMove && FacingDirHit.collider == MoveDirHit.collider))
+                {
                     //Move Right
+                    if (IsDragging && FacingDirHit.collider != null && FacingDirHit.collider.gameObject.tag == "MagicObject") FacingDirHit.collider.gameObject.GetComponent<MagicObject>().Move(Input);
                     TargetPos = gameObject.transform.position + new Vector3(GameInstance.Instance.TileSize, 0f, 0f);
                     Moved = true;
                     InMoveAnim = false;
+                    if (!IsDragging)
+                    {
+                        Facing = GameInstance.FacingDir.RIGHT;
+                    }
+
                 }
             }
-            else if(Input.x <= -MovementThreshold && !Moved)
+            else if (Input.x <= -MovementThreshold && !Moved)
             {
-                RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector3(-GameInstance.Instance.TileSize, 0f, 0f), GameInstance.Instance.TileSize, BlockMovementLayer);
-                if (Hit.collider == null || (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable"))
+                RaycastHit2D FacingDirHit = Physics2D.Raycast(gameObject.transform.position, GetFacingDir(), GameInstance.Instance.TileSize, BlockMovementLayer);
+                RaycastHit2D MoveDirHit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.right, GameInstance.Instance.TileSize, BlockMovementLayer);
+                if (!IsDragging)
                 {
-                    if (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable")
+                    Facing = GameInstance.FacingDir.LEFT;
+                }
+
+                if (IsDragging && FacingDirHit.collider != null)
+                {
+                    if (FacingDirHit.collider.gameObject.tag == "MagicObject")
                     {
-                        //Move the box
+                        CanMove = FacingDirHit.collider.gameObject.GetComponent<MagicObject>().CheckMove(Input);
                     }
+                }
+
+                if (MoveDirHit.collider == null || (CanMove && FacingDirHit.collider == MoveDirHit.collider))
+                {
                     //Move Left
+                    if (IsDragging && FacingDirHit.collider != null && FacingDirHit.collider.gameObject.tag == "MagicObject") FacingDirHit.collider.gameObject.GetComponent<MagicObject>().Move(Input);
                     TargetPos = gameObject.transform.position + new Vector3(-GameInstance.Instance.TileSize, 0f, 0f);
                     Moved = true;
                     InMoveAnim = false;
-                }
-            }
-            else if(Input.y >= MovementThreshold && !Moved)
-            {
-                RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector3(0f, GameInstance.Instance.TileSize, 0f), GameInstance.Instance.TileSize, BlockMovementLayer);
-                if (Hit.collider == null || (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable"))
-                {
-                    if (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable")
+                    if (!IsDragging)
                     {
-                        //Move the box
+                        Facing = GameInstance.FacingDir.LEFT;
                     }
-                    //Move Up
+
+                }
+
+            }
+            else if (Input.y >= MovementThreshold && !Moved)
+            {
+                RaycastHit2D FacingDirHit = Physics2D.Raycast(gameObject.transform.position, GetFacingDir(), GameInstance.Instance.TileSize, BlockMovementLayer);
+                RaycastHit2D MoveDirHit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.up, GameInstance.Instance.TileSize, BlockMovementLayer);
+                if (!IsDragging)
+                {
+                    Facing = GameInstance.FacingDir.UP;
+                }
+
+                if (IsDragging && FacingDirHit.collider != null)
+                {
+                    if (FacingDirHit.collider.gameObject.tag == "MagicObject")
+                    {
+                        CanMove = FacingDirHit.collider.gameObject.GetComponent<MagicObject>().CheckMove(Input);
+                    }
+                }
+
+                if (MoveDirHit.collider == null || (CanMove && FacingDirHit.collider == MoveDirHit.collider))
+                {
+                    if (IsDragging && FacingDirHit.collider != null && FacingDirHit.collider.gameObject.tag == "MagicObject") FacingDirHit.collider.gameObject.GetComponent<MagicObject>().Move(Input);
                     TargetPos = gameObject.transform.position + new Vector3(0f, GameInstance.Instance.TileSize, 0f);
                     Moved = true;
                     InMoveAnim = false;
-                }
-            }
-            else if(Input.y <= -MovementThreshold && !Moved)
-            {
-                RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector3(0f, -GameInstance.Instance.TileSize, 0f), GameInstance.Instance.TileSize, BlockMovementLayer);
-                if (Hit.collider == null || (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable"))
-                {
-                    if (IsDragging && Hit.collider != null && Hit.collider.gameObject.tag == "Pushable")
+                    if (!IsDragging)
                     {
-                        //Move the box
+                        Facing = GameInstance.FacingDir.UP;
                     }
+                }
+
+            }
+            else if (Input.y <= -MovementThreshold && !Moved)
+            {
+                RaycastHit2D FacingDirHit = Physics2D.Raycast(gameObject.transform.position, GetFacingDir(), GameInstance.Instance.TileSize, BlockMovementLayer);
+                RaycastHit2D MoveDirHit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.up, GameInstance.Instance.TileSize, BlockMovementLayer);
+                if (!IsDragging)
+                {
+                    Facing = GameInstance.FacingDir.DOWN;
+                }
+
+                if (IsDragging && FacingDirHit.collider != null)
+                {
+                    if (FacingDirHit.collider.gameObject.tag == "MagicObject")
+                    {
+                        CanMove = FacingDirHit.collider.gameObject.GetComponent<MagicObject>().CheckMove(Input);
+                    }
+                }
+
+                if (MoveDirHit.collider == null || (CanMove && FacingDirHit.collider == MoveDirHit.collider))
+                {
                     //Move Down
+                    if (IsDragging && FacingDirHit.collider != null && FacingDirHit.collider.gameObject.tag == "MagicObject") FacingDirHit.collider.gameObject.GetComponent<MagicObject>().Move(Input);
                     TargetPos = gameObject.transform.position + new Vector3(0f, -GameInstance.Instance.TileSize, 0f);
                     Moved = true;
                     InMoveAnim = false;
+                    if (!IsDragging)
+                    {
+                        Facing = GameInstance.FacingDir.DOWN;
+                    }
                 }
             }
         }
     }
-
 }
+

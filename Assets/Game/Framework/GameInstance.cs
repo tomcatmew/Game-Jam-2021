@@ -14,6 +14,23 @@ public class GameInstance : MonoBehaviour
 
     [SerializeField] public float TileSize;
 
+    public GameObject RedMagic;
+    public GameObject YellowMagic;
+    public GameObject BlueMagic;
+    public GameObject GreenMagic;
+    public GameObject PurpleMagic;
+    public GameObject OrangeMagic;
+
+    public enum MagicColor
+    {
+        RED,
+        YELLOW,
+        BLUE,
+        GREEN,
+        PURPLE,
+        ORANGE
+    }
+
     void Awake()
     {
         if(Instance == null)

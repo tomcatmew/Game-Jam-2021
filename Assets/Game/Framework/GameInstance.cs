@@ -12,6 +12,8 @@ public class GameInstance : MonoBehaviour
 
     public PlayerController MyPlayerController;
 
+    public SceneController MySceneController;
+
     [SerializeField] public float TileSize;
 
     public GameObject RedMagic;
@@ -51,6 +53,10 @@ public class GameInstance : MonoBehaviour
             if(MyPlayerController == null)
             {
                 MyPlayerController = gameObject.GetComponent<PlayerController>();
+            }
+            if(MySceneController == null)
+            {
+                MySceneController = gameObject.GetComponent<SceneController>();
             }
 
             DontDestroyOnLoad(gameObject);

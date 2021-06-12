@@ -48,6 +48,12 @@ MonoBehaviour:
   MyGameMode: {fileID: 949508675878332039}
   MyPlayerController: {fileID: 949508675878332032}
   TileSize: 1
+  RedMagic: {fileID: 3936851835411889741, guid: 97ed7e44aae45b249af3f79e7c224e05, type: 3}
+  YellowMagic: {fileID: 1872659172435277634, guid: f319a1827e6150f4e944147acbe2e7f6, type: 3}
+  BlueMagic: {fileID: 9092531963567793232, guid: 5a8343b5298f7c24696b437fb2fb968e, type: 3}
+  GreenMagic: {fileID: 7356565587324807059, guid: f7d6bccd7bef75b4eb67d4fd11f26b2d, type: 3}
+  PurpleMagic: {fileID: 8725790847554949285, guid: e1667eb6ca9330b4686011261d31345b, type: 3}
+  OrangeMagic: {fileID: 6673467754791081914, guid: 50517b0dd84033f44956d9b6c2f7864c, type: 3}
 --- !u!114 &949508675878332032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +68,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ControlledCharacter: {fileID: 0}
   AllowPlayerControl: 1
+  MagicObjectLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &949508675878332039
 MonoBehaviour:
   m_ObjectHideFlags: 0

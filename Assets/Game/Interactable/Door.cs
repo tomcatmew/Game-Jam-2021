@@ -4,31 +4,64 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private bool IsOpen = false;
+    [SerializeField] private bool StartingOpen = false;
+    
     [SerializeField] private GameObject OpenSprite;
     [SerializeField] private GameObject CloseSprite;
+
+    [SerializeField] private List<Switch> ControllSwitchs;
+
+    private bool IsOpen;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (IsOpen)
+        if (ControllSwitchs.Count == 0)
         {
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            CloseSprite.SetActive(false);
-            OpenSprite.SetActive(true);
+            Debug.Log("Warnning! Door Not Connected to Any Switches");
+        }
+
+        if (StartingOpen)
+        {
+            Open();
         }
         else
         {
-            gameObject.GetComponent<BoxCollider2D>().enabled = true;
-            CloseSprite.SetActive(true);
-            OpenSprite.SetActive(false);
+            Close();
         }
+
+        IsOpen = StartingOpen;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void TryActive()
+    {
+        bool IsAllActive = true;
+        //Play Effect
+        foreach (Switch Swi in ControllSwitchs)
+        {
+            if (!Swi.IsActive)
+            {
+                IsAllActive = false;
+                break;
+            }
+        }
+
+        if (IsAllActive)
+        {
+            if (StartingOpen) Close();
+            else Open();
+        }
+        else
+        {
+            if (StartingOpen) Open();
+            else Close();
+        }
     }
 
     public void Open()

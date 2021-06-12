@@ -8,9 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public bool AllowPlayerControl = true;
 
-
-    private bool IsRunning;
     private float HorizontalInput;
+    private float VerticalInput;
 
     //Accept Input
     private void Update()
@@ -18,20 +17,9 @@ public class PlayerController : MonoBehaviour
         if (ControlledCharacter != null && AllowPlayerControl)
         {
             HorizontalInput = Input.GetAxisRaw("Horizontal");
-            if (Input.GetAxisRaw("Shift") == 1f)
-            {
-                IsRunning = true;
-            }
-            else
-            {
-                IsRunning = false;
-            }
-
-            if (Input.GetAxisRaw("Jump") == 1f)
-            {
-                ControlledCharacter.Jump();
-            }
+            VerticalInput = Input.GetAxisRaw("Vertical");
         }
+
     }
 
     //Apply Control using the input accepted
@@ -39,7 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ControlledCharacter != null && AllowPlayerControl)
         {
-            ControlledCharacter.HorizontalMove(HorizontalInput * Time.fixedDeltaTime, IsRunning);
+            ControlledCharacter.Move(new Vector2(HorizontalInput,VerticalInput));
         }
     }
 }

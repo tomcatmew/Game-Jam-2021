@@ -12,6 +12,8 @@ public class GameInstance : MonoBehaviour
 
     public PlayerController MyPlayerController;
 
+    [SerializeField] public float TileSize;
+
     void Awake()
     {
         if(Instance == null)

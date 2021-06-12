@@ -13,9 +13,9 @@ TagManager:
   - Water
   - UI
   - ForeGround
-  - GameEnvironment
-  - Characters
-  - 
+  - Ground
+  - Environment
+  - Character
   - 
   - 
   - 
@@ -41,4 +41,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 1778237271
+    locked: 0
+  - name: GroundTile
+    uniqueID: 165263857
+    locked: 0
+  - name: Environment
+    uniqueID: 90688499
+    locked: 0
+  - name: Character
+    uniqueID: 689655159
+    locked: 0
+  - name: Foreground
+    uniqueID: 1797841381
     locked: 0

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyGameMode: {fileID: 949508675878332039}
   MyPlayerController: {fileID: 949508675878332032}
+  TileSize: 1
 --- !u!114 &949508675878332032
 MonoBehaviour:
   m_ObjectHideFlags: 0

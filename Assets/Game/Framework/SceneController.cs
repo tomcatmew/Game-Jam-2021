@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+
     public void TransitToScene(TransitionStart transitionStart)
     {
         GameInstance.Instance.IsDialoguePlayed = false;

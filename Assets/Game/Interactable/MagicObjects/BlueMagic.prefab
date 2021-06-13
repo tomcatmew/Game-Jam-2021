@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -3029912332651917366}
   - component: {fileID: 7480519790122482940}
   - component: {fileID: 1880233319905569514}
+  - component: {fileID: 5532709763685192769}
   m_Layer: 8
   m_Name: BlueMagic
   m_TagString: MagicObject
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 9092531963567793232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 90688499
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b0d282ed42ad2b94bad9bb1474579a18, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b1375c9ba30561a41a996f33d44a7ddf, type: 3}
+  m_Color: {r: 0, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,14 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0e3a668faa51a4ea109c6698382b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  right_arrow: {fileID: 2381697211777208062, guid: 4e09c34a702595542a2bd7e86e7169d8, type: 3}
-  left_arrow: {fileID: 3527092153214903090, guid: cacbf30b95a5f1a46ac7708962aa2488, type: 3}
-  top_arrow: {fileID: 9199191219473447242, guid: 47019b8e59593c347b51f65099f3e1e7, type: 3}
-  bot_arrow: {fileID: 426312746715881084, guid: 041af2461d89c51438d0d47548f03307, type: 3}
-  right_demop: {fileID: 6467258755728441492, guid: 3d6b38d58869f004480a76e7b7efe55f, type: 3}
-  left_demop: {fileID: 5517745857188210814, guid: 496938ca35d26bd47af68c6792f3e767, type: 3}
-  top_demop: {fileID: 6544217981099633298, guid: fbb6961204f538d44a968cd8eb44657c, type: 3}
-  bot_demop: {fileID: 3548103223430458154, guid: 6a1507a2995cbec4a9b10a55be65eda8, type: 3}
   IsGrabed: 0
   DefaultColor: 2
   BlockMovementLayer:
@@ -127,3 +120,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!95 &5532709763685192769
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9092531963567793232}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9af5dea3c4b0f8241ae6a40fb69cb9b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

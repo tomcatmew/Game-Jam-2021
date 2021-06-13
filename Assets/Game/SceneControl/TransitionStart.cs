@@ -6,16 +6,18 @@ public class TransitionStart : MonoBehaviour
 {
 
     public SceneController MySceneController;
-    public GameObject transitioningGameObject;
 
     public string NewSceneName;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (this.transitioningGameObject.Equals(collision.gameObject))
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.05f);
+        foreach (Collider2D coll in colliders)
         {
-            MySceneController.TransitToScene(this);
+            if (coll.gameObject.tag == "Player")
+            {
+                MySceneController.TransitToScene(this);
+            }
         }
     }
-
 }

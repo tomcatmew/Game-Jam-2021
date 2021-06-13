@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 949508675878332039}
   - component: {fileID: 8828857946159546400}
   - component: {fileID: 4488102389789962856}
+  - component: {fileID: 129344371306765983}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -58,6 +59,7 @@ MonoBehaviour:
   MyGameMode: {fileID: 949508675878332039}
   MyPlayerController: {fileID: 4488102389789962856}
   MySceneController: {fileID: 8828857946159546400}
+  IsDialoguePlayed: 0
   TileSize: 1
   RedMagic: {fileID: 3936851835411889741, guid: 97ed7e44aae45b249af3f79e7c224e05, type: 3}
   YellowMagic: {fileID: 1872659172435277634, guid: f319a1827e6150f4e944147acbe2e7f6, type: 3}
@@ -117,6 +119,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   InputIntervalTime: 0.05
+--- !u!114 &129344371306765983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949508675878332036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea28e003b1b069d4cb179ef021b64a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingCanvasGroup: {fileID: 0}
+  gameOverCanvasGroup: {fileID: 0}
+  fadeDuration: 1
 --- !u!1001 &361100780153887622
 PrefabInstance:
   m_ObjectHideFlags: 0

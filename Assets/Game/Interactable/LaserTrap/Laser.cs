@@ -7,9 +7,11 @@ public class Laser : MonoBehaviour
     [SerializeField] private LayerMask BlockLaserLayer;
     [SerializeField] private LayerMask PlayerLayer;
 
+    public GameObject laserPoint;
     public GameObject laserStart;
     public GameObject laserStraight;
     public GameObject laserEnd;
+    public GameObject laserTail;
     public Direction direction;
 
     private List<GameObject> laserList;
@@ -88,26 +90,56 @@ public class Laser : MonoBehaviour
         float length = (EndPos - StartPos).magnitude / GameInstance.Instance.TileSize;
         Quaternion quaternion = GetLaserQuaternion(direction);
 
-        for (int i = 0; i < length; i++)
+        if ((int) length <= 1)
         {
-            Vector2 TmpPos = StartPos + (EndPos - StartPos).normalized * i * GameInstance.Instance.TileSize;
-            Vector3 InitialPos = new Vector3(TmpPos.x, TmpPos.y, 0f);
-            if (i == 0)
+            for (int i = 0; i < length; i++)
             {
-                GameObject Laser = Instantiate(laserStart, InitialPos, quaternion);
-                laserList.Add(Laser);
-            }
-            else if (i + 1 > length)
-            {
-                GameObject Laser = Instantiate(laserEnd, InitialPos, quaternion);
-                laserList.Add(Laser);
-            }
-            else
-            {
-                GameObject Laser = Instantiate(laserStraight, InitialPos, quaternion);
-                laserList.Add(Laser);
+                Vector2 TmpPos = StartPos + (EndPos - StartPos).normalized * i * GameInstance.Instance.TileSize;
+                Vector3 InitialPos = new Vector3(TmpPos.x, TmpPos.y, 0f);
+                if (i == 0)
+                {
+                    GameObject Laser = Instantiate(laserPoint, InitialPos, quaternion);
+                    laserList.Add(Laser);
+                }
+                else
+                {
+                    GameObject Laser = Instantiate(laserTail, InitialPos, quaternion);
+                    laserList.Add(Laser);
+                }
             }
         }
+        else
+        {
+            for (int i = 0; i < length; i++)
+            {
+                Vector2 TmpPos = StartPos + (EndPos - StartPos).normalized * i * GameInstance.Instance.TileSize;
+                Vector3 InitialPos = new Vector3(TmpPos.x, TmpPos.y, 0f);
+                if (i == 0)
+                {
+                    Debug.Log("draw 0");
+                    GameObject Laser = Instantiate(laserPoint, InitialPos, quaternion);
+                    laserList.Add(Laser);
+                }
+                else if (i == 1)
+                {
+                    Debug.Log("draw 1");
+                    GameObject Laser = Instantiate(laserStart, InitialPos, quaternion);
+                    laserList.Add(Laser);
+                }
+                else if (i + 1 > length)
+                {
+                    GameObject Laser = Instantiate(laserEnd, InitialPos, quaternion);
+                    laserList.Add(Laser);
+                }
+                else
+                {
+                    GameObject Laser = Instantiate(laserStraight, InitialPos, quaternion);
+                    laserList.Add(Laser);
+                }
+            }
+        }
+
+
     }
 
     private Vector2 GetLaserDerection()

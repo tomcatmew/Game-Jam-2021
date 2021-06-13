@@ -49,6 +49,7 @@ public class GameInstance : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
+
             if(MyGameMode == null)
             {
                 MyGameMode = gameObject.GetComponent<GameMode>();

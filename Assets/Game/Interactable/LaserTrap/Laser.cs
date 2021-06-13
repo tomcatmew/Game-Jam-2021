@@ -1,14 +1,35 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
     [SerializeField] private float LaserDistance = 100f;
-    [SerializeField] private Transform LaserFirePoint;
-    [SerializeField] private LineRenderer MyLineRenderer;
     [SerializeField] private LayerMask BlockLaserLayer;
     [SerializeField] private LayerMask PlayerLayer;
+
+    public GameObject laserStart;
+    public GameObject laserStraight;
+    public GameObject laserEnd;
+    public Direction direction;
+
+    private List<GameObject> laserList;
+
+    private GameObject prevHit;
+
+    private bool isDraw = false;
+
+    public enum Direction
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
+
+    private void Awake()
+    {
+        laserList = new List<GameObject>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,17 +39,23 @@ public class Laser : MonoBehaviour
 
     void ShootLaser()
     {
-        RaycastHit2D Hit = Physics2D.Raycast(LaserFirePoint.transform.position, (LaserFirePoint.position - gameObject.transform.position).normalized, Mathf.Infinity, BlockLaserLayer + PlayerLayer);
+        RaycastHit2D Hit = Physics2D.Raycast(transform.position, GetLaserDerection(), Mathf.Infinity, BlockLaserLayer + PlayerLayer);
         if (Hit.collider != null)
         {
-            Draw2DRay(LaserFirePoint.position,Hit.point);
-            if(Hit.collider.gameObject.tag == "Player")
+            if (!Hit.collider.gameObject.Equals(prevHit))
+            {
+                removeLaser();
+                DrawLaser(transform.position, Hit.point);
+                prevHit = Hit.collider.gameObject;
+                isDraw = false;
+            }
+            if (Hit.collider.gameObject.tag == "Player")
             {
                 Hit.collider.gameObject.GetComponent<PlayerCharacter>().Kill();
             }
-            else if(Hit.collider.gameObject.tag == "MagicObject")
+            else if (Hit.collider.gameObject.tag == "MagicObject")
             {
-                if(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor != GameInstance.MagicColor.PURPLE)
+                if (Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor != GameInstance.MagicColor.PURPLE)
                 {
                     Hit.collider.gameObject.GetComponent<MagicObject>().Kill();
                     GameInstance.Instance.MyGameMode.GameOver();
@@ -37,20 +64,96 @@ public class Laser : MonoBehaviour
         }
         else
         {
-            Draw2DRay(LaserFirePoint.position, LaserFirePoint.position + (LaserFirePoint.position - gameObject.transform.position).normalized * LaserDistance);
+            if (!isDraw)
+            {
+                DrawLaser(transform.position, transform.position + transform.position.normalized * LaserDistance);
+                isDraw = true;
+            }
         }
 
     }
 
-    private void Draw2DRay(Vector2 StartPos, Vector2 EndPos)
+    private void removeLaser()
     {
-        MyLineRenderer.SetPosition(0, StartPos);
-        MyLineRenderer.SetPosition(1, EndPos);
+        for (int i = 0; i < laserList.Count; i++)
+        {
+            Destroy(laserList[i]);
+        }
+
+        laserList.Clear();
+    }
+
+    private void DrawLaser(Vector2 StartPos, Vector2 EndPos)
+    {
+        float length = (EndPos - StartPos).magnitude / GameInstance.Instance.TileSize;
+        Quaternion quaternion = GetLaserQuaternion(direction);
+
+        for (int i = 0; i < length; i++)
+        {
+            Vector2 TmpPos = StartPos + (EndPos - StartPos).normalized * i * GameInstance.Instance.TileSize;
+            Vector3 InitialPos = new Vector3(TmpPos.x, TmpPos.y, 0f);
+            if (i == 0)
+            {
+                GameObject Laser = Instantiate(laserStart, InitialPos, quaternion);
+                laserList.Add(Laser);
+            }
+            else if (i + 1 > length)
+            {
+                GameObject Laser = Instantiate(laserEnd, InitialPos, quaternion);
+                laserList.Add(Laser);
+            }
+            else
+            {
+                GameObject Laser = Instantiate(laserStraight, InitialPos, quaternion);
+                laserList.Add(Laser);
+            }
+        }
+    }
+
+    private Vector2 GetLaserDerection()
+    {
+        if (direction.Equals(Direction.LEFT))
+        {
+            return -gameObject.transform.right;
+        }
+        else if (direction.Equals(Direction.UP))
+        {
+            return gameObject.transform.up;
+        }
+        else if (direction.Equals(Direction.RIGHT))
+        {
+            return gameObject.transform.right;
+        }
+        else
+        {
+            return -gameObject.transform.up;
+        }
+    }
+
+    private Quaternion GetLaserQuaternion(Direction direction)
+    {
+        if (direction.Equals(Direction.LEFT))
+        {
+            return new Quaternion();
+        }
+        else if (direction.Equals(Direction.UP))
+        {
+            return Quaternion.Euler(new Vector3(0f, 0f, -90f));
+        }
+        else if (direction.Equals(Direction.RIGHT))
+        {
+            return Quaternion.Euler(new Vector3(0f, 0f, -180f));
+        }
+        else
+        {
+            return Quaternion.Euler(new Vector3(0f, 0f, 90f));
+        }
     }
 
     public void Kill()
     {
         gameObject.SetActive(false);
-        Destroy(gameObject,0.1f);
+        removeLaser();
+        Destroy(gameObject, 0.1f);
     }
 }

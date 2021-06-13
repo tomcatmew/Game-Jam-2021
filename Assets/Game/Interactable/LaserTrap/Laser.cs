@@ -19,6 +19,7 @@ public class Laser : MonoBehaviour
     private GameObject prevHit;
 
     private bool isDraw = false;
+    private int prevDistance;
 
     public enum Direction
     {
@@ -44,11 +45,15 @@ public class Laser : MonoBehaviour
         RaycastHit2D Hit = Physics2D.Raycast(transform.position, GetLaserDerection(), Mathf.Infinity, BlockLaserLayer + PlayerLayer);
         if (Hit.collider != null)
         {
-            if (!Hit.collider.gameObject.Equals(prevHit))
+            int distance = (int)(Hit.point - new Vector2(transform.position.x, transform.position.y)).magnitude;
+            Debug.Log(distance);
+            Debug.Log(prevDistance);
+            if (!Hit.collider.gameObject.Equals(prevHit) || distance != prevDistance)
             {
                 removeLaser();
                 DrawLaser(transform.position, Hit.point);
                 prevHit = Hit.collider.gameObject;
+                prevDistance = distance;
                 isDraw = false;
             }
             if (Hit.collider.gameObject.tag == "Player")
@@ -90,7 +95,7 @@ public class Laser : MonoBehaviour
         float length = (EndPos - StartPos).magnitude / GameInstance.Instance.TileSize;
         Quaternion quaternion = GetLaserQuaternion(direction);
 
-        if ((int) length <= 1)
+        if ((int)length <= 1)
         {
             for (int i = 0; i < length; i++)
             {

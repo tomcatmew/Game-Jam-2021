@@ -14,6 +14,7 @@ public class GameInstance : MonoBehaviour
 
     public SceneController MySceneController;
 
+
     [SerializeField] public float TileSize;
 
     public GameObject RedMagic;

@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class MagicObject : MonoBehaviour
 {
+    public indicontrol right_arrow;
+    public indicontrol left_arrow;
+    public indicontrol top_arrow;
+    public indicontrol bot_arrow;
+
+   
+    public de_indicontrol right_demop;
+    public de_indicontrol left_demop;
+    public de_indicontrol top_demop;
+    public de_indicontrol bot_demop;
 
     public bool IsGrabed = false;
 
@@ -142,51 +152,143 @@ public class MagicObject : MonoBehaviour
         }
     }
 
+    public List<GameObject> CheckNearDecompMagic()
+    {
+        List<GameObject> list = new List<GameObject>();
+
+        // find x direction
+        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(-GameInstance.Instance.TileSize, 0f), GameInstance.Instance.TileSize, ~gameObject.layer);
+        if (Hit.collider == null)
+        {
+            Vector3 tempt = new Vector3(gameObject.transform.position.x - GameInstance.Instance.TileSize, gameObject.transform.position.y, gameObject.transform.position.z);
+            left_demop.render_enable();
+            left_demop.moveObject(tempt);
+
+        }
+        else
+        {
+            left_demop.render_disable();
+        }
+
+        // find x direction
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(GameInstance.Instance.TileSize, 0f), GameInstance.Instance.TileSize, ~gameObject.layer);
+        if (Hit.collider == null)
+        {
+
+            Vector3 tempt = new Vector3(gameObject.transform.position.x + GameInstance.Instance.TileSize, gameObject.transform.position.y, gameObject.transform.position.z); 
+            right_demop.render_enable();
+            right_demop.moveObject(tempt);
+        }
+        else
+        {
+            right_demop.render_disable();
+        }
+
+        // find y direction
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, -GameInstance.Instance.TileSize), GameInstance.Instance.TileSize, ~gameObject.layer);
+        if (Hit.collider == null )
+        {
+            Vector3 tempt = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - GameInstance.Instance.TileSize, gameObject.transform.position.z);
+            bot_demop.render_enable();
+            bot_demop.moveObject(tempt);
+        }
+        else
+        {
+            bot_demop.render_disable();
+        }
+
+        // find y direction
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, GameInstance.Instance.TileSize), GameInstance.Instance.TileSize, ~gameObject.layer);
+        if (Hit.collider == null )
+        {
+            Vector3 tempt = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + GameInstance.Instance.TileSize, gameObject.transform.position.z);
+            top_demop.render_enable();
+            top_demop.moveObject(tempt);
+
+        }
+        else
+        {
+            top_demop.render_disable();
+        }
+
+
+        return list;
+    }
+
     public List<GameObject> CheckNearMagic()
     {
         List<GameObject> list = new List<GameObject>();
 
         // find x direction
-        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, GameInstance.Instance.TileSize, ~gameObject.layer);
-
+        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(-GameInstance.Instance.TileSize, 0f), GameInstance.Instance.TileSize, ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
             if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
             {
+                Vector3 tempt = new Vector3(Hit.collider.gameObject.transform.position.x, Hit.collider.gameObject.transform.position.y, Hit.collider.gameObject.transform.position.z);
+                left_arrow.render_enable();
+                left_arrow.moveObject(tempt);
                 list.Add(Hit.collider.gameObject);
             }
+        }
+        else
+        {
+            left_arrow.render_disable();
         }
 
         // find x direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.right, GameInstance.Instance.TileSize, ~gameObject.layer);
-
+        //Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(-GameInstance.Instance.TileSize/2, 0f), ~gameObject.layer);
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(GameInstance.Instance.TileSize, 0f), GameInstance.Instance.TileSize, ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
             if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
             {
+                Vector3 tempt = new Vector3(Hit.collider.gameObject.transform.position.x, Hit.collider.gameObject.transform.position.y, Hit.collider.gameObject.transform.position.z);
+                right_arrow.render_enable();
+                right_arrow.moveObject(tempt);
                 list.Add(Hit.collider.gameObject);
             }
+        }
+        else
+        {
+            right_arrow.render_disable();
         }
 
         // find y direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.up, GameInstance.Instance.TileSize, ~gameObject.layer);
-
+        //Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, GameInstance.Instance.TileSize/2), ~gameObject.layer);
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f,-GameInstance.Instance.TileSize), GameInstance.Instance.TileSize, ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
             if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
             {
+                Vector3 tempt = new Vector3(Hit.collider.gameObject.transform.position.x, Hit.collider.gameObject.transform.position.y, Hit.collider.gameObject.transform.position.z);
+                bot_arrow.render_enable();
+                bot_arrow.moveObject(tempt);
                 list.Add(Hit.collider.gameObject);
             }
+        }
+        else
+        {
+            bot_arrow.render_disable();
         }
         // find y direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.up, GameInstance.Instance.TileSize, ~gameObject.layer);
+        //Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, -GameInstance.Instance.TileSize/2), ~gameObject.layer);
+        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, GameInstance.Instance.TileSize), GameInstance.Instance.TileSize, ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
             if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
             {
+                Vector3 tempt = new Vector3(Hit.collider.gameObject.transform.position.x, Hit.collider.gameObject.transform.position.y, Hit.collider.gameObject.transform.position.z);
+                top_arrow.render_enable();
+                top_arrow.moveObject(tempt);
                 list.Add(Hit.collider.gameObject);
             }
         }
+        else
+        {
+            top_arrow.render_disable();
+        }
+
 
         return list;
     }
@@ -283,6 +385,14 @@ public class MagicObject : MonoBehaviour
 
     public void Kill()
     {
+        right_arrow.render_disable();
+        left_arrow.render_disable();
+        top_arrow.render_disable();
+        bot_arrow.render_disable();
+        top_demop.render_disable();
+        left_demop.render_disable();
+        bot_demop.render_disable();
+        right_demop.render_disable();
         gameObject.SetActive(false);
         Destroy(gameObject, 0.1f);
     }

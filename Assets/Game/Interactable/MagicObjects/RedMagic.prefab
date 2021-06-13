@@ -96,6 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0e3a668faa51a4ea109c6698382b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  right_arrow: {fileID: 2381697211777208062, guid: 4e09c34a702595542a2bd7e86e7169d8, type: 3}
+  left_arrow: {fileID: 3527092153214903090, guid: cacbf30b95a5f1a46ac7708962aa2488, type: 3}
+  top_arrow: {fileID: 9199191219473447242, guid: 47019b8e59593c347b51f65099f3e1e7, type: 3}
+  bot_arrow: {fileID: 426312746715881084, guid: 041af2461d89c51438d0d47548f03307, type: 3}
+  right_demop: {fileID: 6467258755728441492, guid: 3d6b38d58869f004480a76e7b7efe55f, type: 3}
+  left_demop: {fileID: 5517745857188210814, guid: 496938ca35d26bd47af68c6792f3e767, type: 3}
+  top_demop: {fileID: 6544217981099633298, guid: fbb6961204f538d44a968cd8eb44657c, type: 3}
+  bot_demop: {fileID: 3548103223430458154, guid: 6a1507a2995cbec4a9b10a55be65eda8, type: 3}
   IsGrabed: 0
   DefaultColor: 0
   BlockMovementLayer:

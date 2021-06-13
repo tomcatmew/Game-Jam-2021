@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public bool AllowPlayerControl = true;
 
+    public aimcontrol MyAim;
+
     [SerializeField] private LayerMask MagicObjectLayer;
     [SerializeField] private float InputIntervalTime = 0.05f;
 
@@ -32,6 +34,30 @@ public class PlayerController : MonoBehaviour
         {
             HorizontalInput = Input.GetAxisRaw("Horizontal");
             VerticalInput = Input.GetAxisRaw("Vertical");
+
+
+            RaycastHit2D Hit = Physics2D.Raycast(ControlledCharacter.transform.position, ControlledCharacter.GetFacingDir(), GameInstance.Instance.TileSize, MagicObjectLayer);
+            if (Hit.collider != null && Hit.collider.tag == "MagicObject")
+            {
+                Vector3 tempt = new Vector3(Hit.collider.gameObject.transform.position.x, Hit.collider.gameObject.transform.position.y, Hit.collider.gameObject.transform.position.z);
+                MyAim.render_enable();
+                MyAim.moveObject(tempt);
+                MagicObject mynear = Hit.collider.gameObject.GetComponent<MagicObject>();
+
+
+                if (mynear.DefaultColor == GameInstance.MagicColor.GREEN || mynear.DefaultColor == GameInstance.MagicColor.PURPLE || mynear.DefaultColor == GameInstance.MagicColor.ORANGE)
+                {
+                    mynear.CheckNearDecompMagic();
+                }
+                else
+                {
+                    mynear.CheckNearMagic();
+                }
+            }
+            else
+            {
+                MyAim.render_disable();
+            }
 
             if (Input.GetAxisRaw("Drag") == 1f)
             {
@@ -89,6 +115,8 @@ public class PlayerController : MonoBehaviour
                     RaycastHit2D Hit = Physics2D.Raycast(ControlledCharacter.transform.position, ControlledCharacter.GetFacingDir(), GameInstance.Instance.TileSize, MagicObjectLayer);
                     if (Hit.collider != null && Hit.collider.tag == "MagicObject")
                     {
+                        Vector3 tempt = new Vector3(Hit.collider.gameObject.transform.position.x, Hit.collider.gameObject.transform.position.y, Hit.collider.gameObject.transform.position.z);
+                        MyAim.moveObject(tempt);
                         if (Mathf.Abs(HorizontalInput) == 1f || Mathf.Abs(VerticalInput) == 1f)
                         {
                             Hit.collider.gameObject.GetComponent<MagicObject>().ComposeMagicColor(new Vector2(HorizontalInput, VerticalInput));

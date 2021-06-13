@@ -130,23 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 219528222}
     m_Modifications:
-    - target: {fileID: 620990040, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
-      propertyPath: typingInterval
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 620990040, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
-      propertyPath: sentences.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 620990040, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
-      propertyPath: sentences.Array.data[0]
-      value: A purple laser? Why is there something so dangerous here?
-      objectReference: {fileID: 0}
-    - target: {fileID: 620990040, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
-      propertyPath: sentences.Array.data[1]
-      value: The purple laser will kill the player, use the purple element to block
-        it
-      objectReference: {fileID: 0}
     - target: {fileID: 4678751640709372017, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
       propertyPath: m_Name
       value: InGameUI

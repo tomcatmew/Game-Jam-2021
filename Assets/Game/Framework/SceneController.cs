@@ -5,6 +5,16 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
 
+    public void LoadNewLevel(string Name)
+    {
+        SceneManager.LoadSceneAsync(Name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void TransitToScene(TransitionStart transitionStart)
     {
         GameInstance.Instance.IsDialoguePlayed = false;

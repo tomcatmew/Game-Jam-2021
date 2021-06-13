@@ -15,6 +15,24 @@ EditorBuildSettings:
     path: Assets/Scenes/EETestScene.unity
     guid: 57b2042088881e540b0005e19727f1ec
   - enabled: 1
+    path: Assets/Scenes/TomcatStart.unity
+    guid: 3a1cf89b36233f44eb37df98c6895f2e
+  - enabled: 1
     path: Assets/Scenes/TomcatFirstLevel.unity
     guid: c9a9874c0c9529d499c0240eee698888
+  - enabled: 1
+    path: Assets/Scenes/level2.unity
+    guid: 769607e3f4e64ab4cb75f15ddb17bb1d
+  - enabled: 1
+    path: Assets/Scenes/level3.unity
+    guid: 80399f1f28216d947a42fb2c4d54b88d
+  - enabled: 1
+    path: Assets/Scenes/level4.unity
+    guid: 8553e01029b6a1c4e88a2f84ff4b4d64
+  - enabled: 1
+    path: Assets/Scenes/level5.unity
+    guid: 5321c3316bcf0b849b8172054f42332e
+  - enabled: 1
+    path: Assets/Scenes/level6.unity
+    guid: 2541aef9c25a28246a8951dbb23d813e
   m_configObjects: {}

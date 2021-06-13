@@ -14,7 +14,7 @@ public class GameInstance : MonoBehaviour
 
     public SceneController MySceneController;
 
-    public ScreenFader MyScreenFader;
+    public bool IsDialoguePlayed;
 
 
     [SerializeField] public float TileSize;
@@ -61,11 +61,8 @@ public class GameInstance : MonoBehaviour
             {
                 MySceneController = gameObject.GetComponent<SceneController>();
             }
-            if(MyScreenFader == null)
-            {
-                MyScreenFader = gameObject.GetComponent<ScreenFader>();
-            }
 
+            IsDialoguePlayed = false;
             DontDestroyOnLoad(gameObject);
         }
         else

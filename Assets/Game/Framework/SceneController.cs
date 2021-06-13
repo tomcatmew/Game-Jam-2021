@@ -6,9 +6,15 @@ public class SceneController : MonoBehaviour
 {
     public void TransitToScene(TransitionStart transitionStart)
     {
-        GameInstance.Instance.MyScreenFader.FadeSceneOut(transitionStart.fadeType);
+        GameInstance.Instance.IsDialoguePlayed = false;
         SceneManager.LoadSceneAsync(transitionStart.NewSceneName);
-        GameInstance.Instance.MyScreenFader.FadeSceneIn();
+    }
+
+    public void ReloadLevel()
+    {
+        GameInstance.Instance.IsDialoguePlayed = true;
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
 }

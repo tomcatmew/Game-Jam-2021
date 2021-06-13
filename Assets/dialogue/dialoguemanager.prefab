@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 524001596688440867}
-  - component: {fileID: 524001596688440864}
+  - component: {fileID: 4678751641879611883}
   m_Layer: 0
   m_Name: dialoguemanager
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &524001596688440864
+--- !u!114 &4678751641879611883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,9 +40,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 524001596688440865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f637061460201ea4eaf753cc12d18cec, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bbcd02f925105d40a6eb6d98711aaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 0}
-  dialogueText: {fileID: 0}
+  textdisplay: {fileID: 0}
+  sentences:
+  - Hi, welcome to the color puzzle world~
+  - Checkout how to control your magic stones ~
+  - Let's go!
+  typingInterval: 0.02
   animator: {fileID: 0}

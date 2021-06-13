@@ -698,6 +698,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
+      propertyPath: nameText
+      value: 
+      objectReference: {fileID: 343697464}
     - target: {fileID: 9115828079106577257, guid: ddf8e447f20168e44bd78da161de85fa, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -746,14 +754,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: nameText
-      value: 
-      objectReference: {fileID: 343697464}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf8e447f20168e44bd78da161de85fa, type: 3}
 --- !u!1001 &786732062
@@ -763,6 +763,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1715459411}
     m_Modifications:
+    - target: {fileID: 620990040, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: WASD to move, Hold space to move color elements,
+      objectReference: {fileID: 0}
+    - target: {fileID: 620990040, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
+      propertyPath: sentences.Array.data[1]
+      value: Hold Q or W and use arrow key to combine and separate colors.
+      objectReference: {fileID: 0}
+    - target: {fileID: 620990040, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
+      propertyPath: sentences.Array.data[2]
+      value: 'Orange element: pushing it against a wall with cracks can destroy it'
+      objectReference: {fileID: 0}
     - target: {fileID: 4678751640709372017, guid: 6d6f6088c792fb6478e268e7f439b4fc, type: 3}
       propertyPath: m_Name
       value: InGameUI
@@ -2316,6 +2328,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4381a6e2901fbf24b80af212088967e4, type: 3}
+--- !u!114 &2113007968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 358889366, guid: 1c87043aa530c9c48b4909ce4d359f20, type: 3}
+  m_PrefabInstance: {fileID: 2131721581}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab01916faa53494d868006cdaafb055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2131721581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2378,7 +2401,7 @@ PrefabInstance:
     - target: {fileID: 4488102389789962856, guid: 1c87043aa530c9c48b4909ce4d359f20, type: 3}
       propertyPath: MyAim
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2113007968}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c87043aa530c9c48b4909ce4d359f20, type: 3}
 --- !u!1001 &2178242445997984397

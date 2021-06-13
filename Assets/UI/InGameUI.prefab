@@ -662,7 +662,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4678751641879611883}
+      - m_Target: {fileID: 620990040}
         m_TargetAssemblyTypeName: dialog_new, Assembly-CSharp
         m_MethodName: nextsentence
         m_Mode: 1
@@ -893,25 +893,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4678751642552619650}
   m_CullTransparentMesh: 1
---- !u!114 &4678751641879611883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5164471508350474642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bbcd02f925105d40a6eb6d98711aaa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textdisplay: {fileID: 4678751640744816523}
-  sentences:
-  - Hi, welcome to the color puzzle world~
-  - Checkout how to control your magic stones ~
-  - Let's go!
-  typingInterval: 0.02
-  animator: {fileID: 4678751642551284348}
 --- !u!1001 &4678751642366052275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -919,45 +900,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4678751642551284347}
     m_Modifications:
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: nameText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: dialogue1.name
-      value: Tomcat
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: dialogue1.sentences.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: dialogue1.sentences.Array.data[0]
-      value: Hello this is mwitcher
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: dialogue1.sentences.Array.data[1]
-      value: wpow
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: dialogue1.sentences.Array.data[2]
-      value: mew mew mew ~
-      objectReference: {fileID: 0}
     - target: {fileID: 524001596688440865, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
       propertyPath: m_Name
       value: dialoguemanager
-      objectReference: {fileID: 0}
-    - target: {fileID: 524001596688440865, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 524001596688440867, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
       propertyPath: m_RootOrder
@@ -1003,16 +948,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 524001596688440864, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
+    - target: {fileID: 4678751641879611883, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 4678751642551284348}
+    - target: {fileID: 4678751641879611883, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
+      propertyPath: textdisplay
+      value: 
+      objectReference: {fileID: 4678751640744816523}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
 --- !u!4 &5164471508350474640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 524001596688440867, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
   m_PrefabInstance: {fileID: 4678751642366052275}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5164471508350474642 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 524001596688440865, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
+--- !u!114 &620990040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4678751641879611883, guid: e7d40d99510c9af4b8368eb1f4e0cb3e, type: 3}
   m_PrefabInstance: {fileID: 4678751642366052275}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bbcd02f925105d40a6eb6d98711aaa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

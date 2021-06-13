@@ -220,7 +220,6 @@ public class MagicObject : MonoBehaviour
         List<GameObject> list = new List<GameObject>();
 
         // find x direction
-
         RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(-GameInstance.Instance.TileSize, 0f), GameInstance.Instance.TileSize, ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
@@ -272,7 +271,6 @@ public class MagicObject : MonoBehaviour
         {
             bot_arrow.render_disable();
         }
-
         // find y direction
         //Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, -GameInstance.Instance.TileSize/2), ~gameObject.layer);
         Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, GameInstance.Instance.TileSize), GameInstance.Instance.TileSize, ~gameObject.layer);

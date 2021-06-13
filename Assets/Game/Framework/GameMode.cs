@@ -16,6 +16,14 @@ public class GameMode : MonoBehaviour
             GameInstance.Instance.MyPlayerController.AllowPlayerControl = false;
             IsGameOver = true;
             Debug.Log("GameOver");
+            //Transation Effect Here
+            Restart();
         }
+    }
+
+    public void Restart()
+    {
+        IsGameOver = false;
+        GameInstance.Instance.MySceneController.ReloadLevel();
     }
 }

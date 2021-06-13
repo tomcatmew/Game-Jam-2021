@@ -14,6 +14,8 @@ public class GameInstance : MonoBehaviour
 
     public SceneController MySceneController;
 
+    public bool IsDialoguePlayed;
+
 
     [SerializeField] public float TileSize;
 
@@ -60,6 +62,7 @@ public class GameInstance : MonoBehaviour
                 MySceneController = gameObject.GetComponent<SceneController>();
             }
 
+            IsDialoguePlayed = false;
             DontDestroyOnLoad(gameObject);
         }
         else

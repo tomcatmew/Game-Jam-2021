@@ -7,6 +7,10 @@ public class Switch : MonoBehaviour
     [SerializeField] private GameInstance.MagicColor RequiredColor = GameInstance.MagicColor.RED;
     [SerializeField] private List<Door> ControlledDoors;
 
+    [SerializeField] private Sprite RedSwitchSprite;
+    [SerializeField] private Sprite BlueSwitchSprite;
+    [SerializeField] private Sprite YellowSwitchSprite;
+
     public bool IsActive = false;
      
     // Start is called before the first frame update
@@ -15,6 +19,19 @@ public class Switch : MonoBehaviour
         if(ControlledDoors.Count == 0)
         {
             Debug.Log("Warnning! Switch Not Connected to Any Doors");
+        }
+
+        switch (RequiredColor)
+        {
+            case GameInstance.MagicColor.RED:
+                gameObject.GetComponent<SpriteRenderer>().sprite = RedSwitchSprite;
+                break;
+            case GameInstance.MagicColor.BLUE:
+                gameObject.GetComponent<SpriteRenderer>().sprite = BlueSwitchSprite;
+                break;
+            case GameInstance.MagicColor.YELLOW:
+                gameObject.GetComponent<SpriteRenderer>().sprite = YellowSwitchSprite;
+                break;
         }
     }
 

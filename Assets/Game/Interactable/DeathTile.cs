@@ -57,6 +57,7 @@ public class DeathTile : MonoBehaviour
         if (!IsAlive)
         {
             //Player Effect
+            AliveSprite.GetComponent<Animator>().Play("DeathTileFlourish");
             DeathSprite.SetActive(false);
             AliveSprite.SetActive(true);
             IsAlive = true;

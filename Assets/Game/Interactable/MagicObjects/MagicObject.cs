@@ -147,32 +147,45 @@ public class MagicObject : MonoBehaviour
         List<GameObject> list = new List<GameObject>();
 
         // find x direction
-        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(GameInstance.Instance.TileSize, 0f), ~gameObject.layer);
+        RaycastHit2D Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, GameInstance.Instance.TileSize, ~gameObject.layer);
 
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
-            list.Add(Hit.collider.gameObject);
+            if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
+            {
+                list.Add(Hit.collider.gameObject);
+            }
         }
 
         // find x direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(-GameInstance.Instance.TileSize, 0f), ~gameObject.layer);
+        Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.right, GameInstance.Instance.TileSize, ~gameObject.layer);
+
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
-            list.Add(Hit.collider.gameObject);
+            if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
+            {
+                list.Add(Hit.collider.gameObject);
+            }
         }
 
         // find y direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, GameInstance.Instance.TileSize), ~gameObject.layer);
-        if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
-        {
-            list.Add(Hit.collider.gameObject);
-        }
+        Hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.up, GameInstance.Instance.TileSize, ~gameObject.layer);
 
-        // find y direction
-        Hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(0f, -GameInstance.Instance.TileSize), ~gameObject.layer);
         if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
         {
-            list.Add(Hit.collider.gameObject);
+            if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
+            {
+                list.Add(Hit.collider.gameObject);
+            }
+        }
+        // find y direction
+        Hit = Physics2D.Raycast(gameObject.transform.position, -gameObject.transform.up, GameInstance.Instance.TileSize, ~gameObject.layer);
+        if (Hit.collider != null && Hit.collider.CompareTag("MagicObject"))
+        {
+            if (GetComposedColor(Hit.collider.gameObject.GetComponent<MagicObject>().DefaultColor) != DefaultColor)
+            {
+                list.Add(Hit.collider.gameObject);
+            }
         }
 
         return list;

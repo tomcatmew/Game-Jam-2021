@@ -13,10 +13,13 @@ public class DialogueManager : MonoBehaviour
 
 	private Queue<string> sentences;
 
+	public Dialogue dialogue1;
 	// Use this for initialization
 	void Start()
 	{
 		sentences = new Queue<string>();
+		StartDialogue(dialogue1);
+
 	}
 
 	public void StartDialogue(Dialogue dialogue)

@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
 
     private float HorizontalInput;
     private float VerticalInput;
-    private bool InDragMode;
-    private bool InConnectMode;
-    private bool InDisconnectMode;
+    private bool InDragMode = false;
+    private bool InConnectMode = false;
+    private bool InDisconnectMode = false;
     private bool ChangeOrder;
 
     private void Start()
@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
         {
             HorizontalInput = Input.GetAxisRaw("Horizontal");
             VerticalInput = Input.GetAxisRaw("Vertical");
-            if(Input.GetAxisRaw("Drag") == 1f)
+
+            if (Input.GetAxisRaw("Drag") == 1f)
             {
                 InDragMode = true;
             }

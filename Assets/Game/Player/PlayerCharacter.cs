@@ -26,6 +26,8 @@ public class PlayerCharacter : MonoBehaviour
     private Vector3 TargetPos = Vector3.zero;
     private Vector3 StartPos = Vector3.zero;
 
+    //Animator Control
+    private Animator myanimator; 
     private void Awake()
     {
 
@@ -33,6 +35,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Start()
     {
+        myanimator = GetComponent<Animator>();
         if (MyPlayerController == null && AutoPocessOnCreate)
         {
             GameInstance.Instance.MyPlayerController.ControlledCharacter = this;
@@ -115,6 +118,7 @@ public class PlayerCharacter : MonoBehaviour
                 if (!IsDragging)
                 {
                     Facing = GameInstance.FacingDir.RIGHT;
+                    myanimator.SetInteger("dir", 3);
                 }
 
                 if (IsDragging && FacingDirHit.collider != null)
@@ -135,6 +139,7 @@ public class PlayerCharacter : MonoBehaviour
                     if (!IsDragging)
                     {
                         Facing = GameInstance.FacingDir.RIGHT;
+                        myanimator.SetInteger("dir", 3);
                     }
 
                 }
@@ -146,6 +151,7 @@ public class PlayerCharacter : MonoBehaviour
                 if (!IsDragging)
                 {
                     Facing = GameInstance.FacingDir.LEFT;
+                    myanimator.SetInteger("dir", 2);
                 }
 
                 if (IsDragging && FacingDirHit.collider != null)
@@ -166,6 +172,7 @@ public class PlayerCharacter : MonoBehaviour
                     if (!IsDragging)
                     {
                         Facing = GameInstance.FacingDir.LEFT;
+                        myanimator.SetInteger("dir", 2);
                     }
 
                 }
@@ -178,6 +185,7 @@ public class PlayerCharacter : MonoBehaviour
                 if (!IsDragging)
                 {
                     Facing = GameInstance.FacingDir.UP;
+                    myanimator.SetInteger("dir", 0);
                 }
 
                 if (IsDragging && FacingDirHit.collider != null)
@@ -197,6 +205,7 @@ public class PlayerCharacter : MonoBehaviour
                     if (!IsDragging)
                     {
                         Facing = GameInstance.FacingDir.UP;
+                        myanimator.SetInteger("dir", 0);
                     }
                 }
 
@@ -208,6 +217,7 @@ public class PlayerCharacter : MonoBehaviour
                 if (!IsDragging)
                 {
                     Facing = GameInstance.FacingDir.DOWN;
+                    myanimator.SetInteger("dir", 1);
                 }
 
                 if (IsDragging && FacingDirHit.collider != null)
@@ -228,6 +238,7 @@ public class PlayerCharacter : MonoBehaviour
                     if (!IsDragging)
                     {
                         Facing = GameInstance.FacingDir.DOWN;
+                        myanimator.SetInteger("dir", 1);
                     }
                 }
             }

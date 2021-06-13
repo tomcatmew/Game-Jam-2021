@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: dialogue_enter
+  m_Name: ania_out
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,30 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-<<<<<<< Updated upstream:Assets/dialogue/dialogue_enter.anim
-        value: -186.16
-=======
-        value: -156.363
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_AnchoredPosition.x
-    path: 
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: -20.87808
->>>>>>> Stashed changes:Assets/dialogue/ania_in.anim
+        value: -500.8
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -101,30 +78,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-<<<<<<< Updated upstream:Assets/dialogue/dialogue_enter.anim
-        value: -186.16
-=======
-        value: -156.363
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_AnchoredPosition.x
-    path: 
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: -20.87808
->>>>>>> Stashed changes:Assets/dialogue/ania_in.anim
+        value: -500.8
         inSlope: 0
         outSlope: 0
         tangentMode: 136

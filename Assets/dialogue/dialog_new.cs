@@ -16,9 +16,16 @@ public class dialog_new : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameInstance.Instance.MyPlayerController.AllowPlayerControl = false;
-        animator.SetBool("IsOpen", true);
-        StartCoroutine(Type());
+        if (!GameInstance.Instance.IsDialoguePlayed)
+        {
+            GameInstance.Instance.MyPlayerController.AllowPlayerControl = false;
+            animator.SetBool("IsOpen", true);
+            StartCoroutine(Type());
+        }
+        else
+        {
+            EndDialogue();
+        }
     }
 
     IEnumerator Type()

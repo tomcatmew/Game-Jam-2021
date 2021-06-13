@@ -16,7 +16,7 @@ public class dialog_new : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameInstance.Instance.MyPlayerController.AllowPlayerControl = false;
         animator.SetBool("IsOpen", true);
         StartCoroutine(Type());
     }
@@ -47,6 +47,7 @@ public class dialog_new : MonoBehaviour
     }
     void EndDialogue()
     {
+        GameInstance.Instance.MyPlayerController.AllowPlayerControl = true;
         animator.SetBool("IsOpen", false);
     }
 }

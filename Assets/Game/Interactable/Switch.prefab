@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5772377429222506890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,11 +72,11 @@ SpriteRenderer:
   m_SortingLayerID: 165263857
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
-  m_Color: {r: 1, g: 0.5518868, b: 0.5518868, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 82669fc637714734eb909225a43caa7d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 2
+  m_DrawMode: 0
   m_Size: {x: 0.984375, y: 0.984375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -96,5 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RequiredColor: 0
-  ControlledDoors: []
+  ControlledDoors:
+  - {fileID: 0}
+  RedSwitchSprite: {fileID: 21300000, guid: 17b40fac5dcc62c4c93d753a1c859af6, type: 3}
+  BlueSwitchSprite: {fileID: 21300000, guid: 82669fc637714734eb909225a43caa7d, type: 3}
+  YellowSwitchSprite: {fileID: 21300000, guid: 0d46e16070029b549b7545ec01220734, type: 3}
   IsActive: 0

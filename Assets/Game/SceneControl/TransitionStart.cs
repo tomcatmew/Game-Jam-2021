@@ -7,6 +7,7 @@ public class TransitionStart : MonoBehaviour
 
     public SceneController MySceneController;
     public GameObject transitioningGameObject;
+    public ScreenFader.FadeType fadeType;
 
     public string NewSceneName;
 

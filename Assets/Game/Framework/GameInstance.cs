@@ -14,6 +14,8 @@ public class GameInstance : MonoBehaviour
 
     public SceneController MySceneController;
 
+    public ScreenFader MyScreenFader;
+
 
     [SerializeField] public float TileSize;
 
@@ -58,6 +60,10 @@ public class GameInstance : MonoBehaviour
             if(MySceneController == null)
             {
                 MySceneController = gameObject.GetComponent<SceneController>();
+            }
+            if(MyScreenFader == null)
+            {
+                MyScreenFader = gameObject.GetComponent<ScreenFader>();
             }
 
             DontDestroyOnLoad(gameObject);
